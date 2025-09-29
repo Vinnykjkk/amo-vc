@@ -1,0 +1,294 @@
+/* --- ESTILOS GERAIS E FONTES --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --preto-fundo: #0d0d0d;
+    --preto-secao: #1a1a1a;
+    --texto-principal: #e0e0e0;
+    --texto-secundario: #a0a0a0;
+    --dourado-destaque: #d437b2;
+    --sombra-dourada: rgba(212, 175, 55, 0.15);
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--preto-fundo);
+    color: var(--texto-principal);
+    line-height: 1.8;
+    overflow-x: hidden;
+}
+
+h1, h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+h2 {
+    font-size: 3rem;
+    margin-bottom: 25px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--dourado-destaque), transparent);
+}
+
+p {
+    font-size: 1.1rem;
+    color: var(--texto-secundario);
+}
+
+section {
+    padding: 80px 20px;
+    background-color: var(--preto-secao);
+    margin: 40px auto;
+    max-width: 1200px;
+    border-radius: 8px;
+    border: 1px solid #222;
+    animation: fadeIn 1.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+main {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* --- CABEÇALHO COM A IMAGEM PRINCIPAL E EFEITOS --- */
+.hero {
+    position: relative;
+    height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    overflow: hidden; /* Importante para os efeitos */
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 10%, transparent 60%);
+    z-index: 2; /* Fica acima das estrelas mas abaixo do texto */
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.8) saturate(0.9);
+}
+
+.hero-text {
+    z-index: 3; /* O texto fica na frente de tudo */
+    padding: 20px;
+}
+
+/* NOVO EFEITO: ANIMAÇÃO DE DIGITAÇÃO */
+.hero-text h1 {
+    font-size: 6rem;
+    line-height: 1.1;
+    text-shadow: 0px 4px 20px rgba(0,0,0,0.8);
+    display: inline-block; /* Necessário para a animação funcionar bem */
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: .1em solid var(--dourado-destaque); /* O cursor de digitação */
+    width: 13ch; /* 13 caracteres em "Para a Flávia" */
+    animation: 
+        typing 3s steps(13, end),
+        blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 13ch }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--dourado-destaque); }
+}
+
+.hero-text p {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 1px;
+    opacity: 0;
+    animation: fadeIn 2s ease-out 3.5s forwards; /* Aparece depois que o nome termina de digitar */
+}
+
+
+/* NOVO EFEITO: CÉU ESTRELADO */
+.stars, .twinkling {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 1;
+}
+
+.stars {
+    background: #000 url(https://www.script-tutorials.com/demos/360/images/stars.png) repeat top center;
+}
+
+.twinkling{
+    background: transparent url(https://www.script-tutorials.com/demos/360/images/twinkling.png) repeat top center;
+    animation: move-twink-back 200s linear infinite;
+}
+
+@keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+
+
+/* --- SEÇÕES DE TEXTO --- */
+.intro, .message {
+    text-align: center;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* --- GALERIA DE FOTOS --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-10px);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.4s ease;
+}
+
+.gallery-item:hover img {
+    filter: brightness(1.1);
+}
+
+.gallery-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--dourado-destaque);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.gallery-item:hover::after {
+    opacity: 1;
+}
+
+
+/* --- VÍDEO, PLAYLIST E RODAPÉ --- */
+.video-container, .playlist {
+    text-align: center;
+}
+
+.video-container video, .playlist iframe {
+    border-radius: 6px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    aspect-ratio: 16/9;
+    border: 1px solid #333;
+    transition: box-shadow 0.4s ease;
+}
+
+.video-container video:hover, .playlist iframe:hover {
+    box-shadow: 0 0 25px var(--sombra-dourada);
+}
+
+footer {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: var(--preto-fundo);
+    color: var(--texto-secundario);
+    border-top: 1px solid #222;
+    margin: 0;
+}
+
+footer p {
+    color: var(--texto-secundario);
+}
+
+footer p .heart {
+    color: var(--dourado-destaque);
+    display: inline-block;
+    animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.3); }
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    h2 { font-size: 2.2rem; }
+    .hero { height: 80vh; }
+    .hero-text h1 { font-size: 3.5rem; width: 13ch; animation: typing 3s steps(13, end), blink-caret .75s step-end infinite; }
+    .hero-text p { font-size: 1.2rem; }
+    section { padding: 60px 15px; margin: 20px auto; }
+}
+
+@media (max-width: 480px) {
+    .hero-text h1 { font-size: 2.8rem; }
+    .hero-text p { font-size: 1.1rem; }
+}
